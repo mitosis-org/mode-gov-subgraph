@@ -1,0 +1,17 @@
+{
+  "name": "@mitosis/mode-gov-subgraph",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "prepare:mode": "mustache config/mode.json subgraph.template.yaml > subgraph.yaml"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.87.0",
+    "@graphprotocol/graph-ts": "0.35.1"
+  },
+  "devDependencies": {
+    "mustache": "^4.0.1"
+  },
+  "packageManager": "yarn@4.5.1"
+}

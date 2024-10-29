@@ -1,0 +1,26 @@
+type Token @entity {
+  id: ID!
+  votes: [Vote!]! @derivedFrom(field: "token")
+}
+
+type Voter @entity {
+  id: ID!
+  votes: [Vote!]! @derivedFrom(field: "voter")
+}
+
+type Gauge @entity {
+  id: ID!
+  totalVotingPower: BigInt!
+  votes: [Vote!]! @derivedFrom(field: "gauge")
+}
+
+type Vote @entity {
+  id: ID!
+  epoch: BigInt!
+  votingPower: BigInt!
+  totalVotingPower: BigInt!
+  timestamp: BigInt!
+  gauge: Gauge! @relation
+  token: Token! @relation
+  voter: Voter! @relation
+}

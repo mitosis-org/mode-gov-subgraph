@@ -1,0 +1,31 @@
+specVersion: 0.0.4
+description: Mode Governance
+repository: https://github.com/mitosis-org/mode-gov-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ModeGov
+    network: "{{ network }}"
+    source:
+      address: "{{ address }}"
+      abi: Gov
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Token
+        - Voter
+        - Gauge
+        - Vote
+      abis:
+        - name: Gov
+          file: ./abis/{{ file }}.json
+      eventHandlers:
+        - event: Voted(indexed address,indexed address,indexed uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleVoted
+        - event: Reset(indexed address,indexed address,indexed uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleReset
+      file: ./src/mapping.ts
